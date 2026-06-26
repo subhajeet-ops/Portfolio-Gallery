@@ -40,7 +40,7 @@
 
   function hallLoop() {
     const dx = hallTarget - hallX;
-    if (Math.abs(dx) <= 2) {
+    if (Math.abs(dx) <= 3) {
       hallX = hallTarget;
       hallRig.classList.remove('walking');
       charHall.style.left = hallX + 'px';
@@ -48,7 +48,7 @@
       if (hallCb) { const f = hallCb; hallCb = null; f(); }
       return;
     }
-    hallX += Math.sign(dx) * Math.min(Math.abs(dx), 7);
+    hallX += Math.sign(dx) * 5.5;
     hallRig.classList.toggle('flip', dx < 0);
     hallDog.classList.toggle('flip', dx < 0);
     charHall.style.left = hallX + 'px';
