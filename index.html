@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Gallery</title>
+  <title>The Gallery — Subhajeet Mishra</title>
+  <meta name="description" content="A walkable art gallery portfolio by Subhajeet Mishra — paintings, digital art, and the story behind the work.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta property="og:title" content="The Gallery — Subhajeet Mishra">
+  <meta property="og:description" content="Step inside a walkable art gallery — paintings, digital art, and the story behind the work.">
+  <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cinzel:wght@500;700&family=Caveat:wght@500;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
@@ -12,7 +17,9 @@
        Max height = wall zone (66vh) minus top breathing room (~8vh) = ~58vh
        Frames grow upward from the dado, never crossing it downward.
        object-fit: contain — always shows the FULL artwork, no cropping */
-    .frame { max-height: 56vh; }
+    /* Cap height so frames never bleed past the wall zone (66vh)
+       and always sit comfortably above the dado/floor. */
+    .frame { max-height: calc(66vh - 110px); }
 
     /* Room I frames — sized by width, aspect-ratio lets height be natural */
     #f1 { width: clamp(140px, 16vw, 210px); aspect-ratio: 791 / 1077; }
@@ -37,21 +44,26 @@
     <div class="hall-title">✦ The Gallery ✦</div>
     <div class="hall-sub">choose a room to step inside</div>
 
-    <div class="doors-row">
-      <div class="door-wrap" data-room="room1">
+    <div class="doors-row" role="navigation" aria-label="Choose a room">
+      <div class="door-wrap" data-room="room1" role="button" tabindex="0" aria-label="Enter Room I — Paintings">
         <div class="door"><div class="door-roman">I</div></div>
         <div class="door-label">Paintings</div>
         <div class="door-sub">Room I</div>
       </div>
-      <div class="door-wrap" data-room="room2">
+      <div class="door-wrap" data-room="room2" role="button" tabindex="0" aria-label="Enter Room II — Digital Arts">
         <div class="door door-celestial"><div class="door-roman">II</div></div>
         <div class="door-label">Digital Arts</div>
         <div class="door-sub">Room II</div>
       </div>
-      <div class="door-wrap locked" data-tip="Coming soon">
-        <div class="door"><div class="door-roman">III</div></div>
+      <div class="door-wrap" data-room="room3" role="button" tabindex="0" aria-label="Enter Room III — About Me">
+        <div class="door door-opera"><div class="door-roman">III</div></div>
         <div class="door-label">About Me</div>
-        <div class="door-sub">Coming soon</div>
+        <div class="door-sub">Room III</div>
+      </div>
+      <div class="door-wrap" id="doorComingSoon" role="button" tabindex="0" aria-label="View Room IV — Coming Soon">
+        <div class="door door-comingsoon"><div class="door-roman">IV</div></div>
+        <div class="door-label">Coming Soon</div>
+        <div class="door-sub">Room IV</div>
       </div>
     </div>
 
@@ -86,18 +98,29 @@
         </div>
         <div class="dog-collar"></div>
       </div>
-    </div>
+    </div><!-- #char-hall -->
+
+
 
     <div class="locked-tip" id="locked-tip"></div>
+
+    <!-- Hallway contact bar -->
+    <div class="hall-contact">
+      <span class="hall-contact-title">Contact</span>
+      <a href="https://www.instagram.com/subhaaaaa_/" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:subhajeet07mishra@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/subhajeet-mishra-a531a4311/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div><!-- #hall -->
 
 
   <!-- ═══════════ ROOM 1 — PAINTINGS ═══════════ -->
   <div class="scene" id="room1">
-    <div class="room-title">Room I — Paintings</div>
+    <div class="room-title">Room I — The Grand Hall</div>
     <button class="back-btn" data-back>← Hallway</button>
     <div class="room-hint">← → arrow keys or A / D to walk</div>
     <div class="exit-hint-pill" id="exitHint">walk through the archway to exit →</div>
+    <div class="mobile-controls"><button data-mob="left" aria-label="Walk left">◀</button><button data-mob="right" aria-label="Walk right">▶</button></div>
     <div class="exit-nav" id="exitNav1">
       <button class="exit-nav-btn" id="exitNavGallery1">← Back to Gallery</button>
       <button class="exit-nav-btn exit-nav-btn-next" id="exitNavToRoom2">Go to Room II →</button>
@@ -169,43 +192,43 @@
       <div class="orb" style="left:2050px; bottom:41%; animation-duration:6.1s; animation-delay:1.8s;"></div>
       <div class="orb" style="left:2250px; bottom:36%; animation-duration:4.7s; animation-delay:.9s;"></div>
 
-      <div id="f1" class="frame" style="left:160px; bottom:calc(34% + 52px);"
+      <div id="f1" class="frame" style="left:270px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Rani Padmini"
            data-desc="A portrayal of Rani Padmavati — grace, strength, and historical significance through intricate ornamentation, rich detailing, and a regal composition. Her presence commands silence.">
         <div class="frame-border"></div>
-        <div class="frame-mat"><img src="assets/paintings/padmavati.jpg" alt="Rani Padmini"></div>
+        <div class="frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/padmavati.jpg" alt="Rani Padmini"></div>
         <div class="frame-label-plate">Rani Padmini</div>
       </div>
 
-      <div id="f2" class="frame" style="left:600px; bottom:calc(34% + 52px);"
+      <div id="f2" class="frame" style="left:740px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Surgical Strike"
            data-desc="Inspired by Operation Sindoor, this artwork captures determination, leadership, and intensity under pressure — the courage and unwavering commitment of those who stand in defense of the nation.">
         <div class="frame-border"></div>
-        <div class="frame-mat"><img src="assets/paintings/howsthejosh.png" alt="Surgical Strike"></div>
+        <div class="frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/howsthejosh.jpg" alt="Surgical Strike"></div>
         <div class="frame-label-plate">Surgical Strike</div>
       </div>
 
-      <div id="f3" class="frame" style="left:1070px; bottom:calc(34% + 52px);"
+      <div id="f3" class="frame" style="left:1170px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Splash"
            data-desc="A vibrant portrait capturing uninhibited happiness through expressive colors, dynamic highlights, and fluid textures. It celebrates innocence, freedom, and the simple moments that define youthful joy.">
         <div class="frame-border"></div>
-        <div class="frame-mat"><img src="assets/paintings/splash.png" alt="Splash"></div>
+        <div class="frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/splash.jpg" alt="Splash"></div>
         <div class="frame-label-plate">Splash</div>
       </div>
 
-      <div id="f4" class="frame" style="left:1550px; bottom:calc(34% + 52px);"
+      <div id="f4" class="frame" style="left:1650px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Shershaah"
            data-desc="A tribute to one of India's most celebrated war heroes. Through realism and expressive detailing, the artwork honors his legacy of patriotism, resilience, and service to the nation.">
         <div class="frame-border"></div>
-        <div class="frame-mat"><img src="assets/paintings/shershaah.png" alt="Shershaah"></div>
+        <div class="frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/shershaah.jpg" alt="Shershaah"></div>
         <div class="frame-label-plate">Shershaah</div>
       </div>
 
-      <div id="f5" class="frame" style="left:2020px; bottom:calc(34% + 52px);"
+      <div id="f5" class="frame" style="left:2120px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Her / Hope"
            data-desc="A monochromatic portrait exploring vulnerability through expressive eyes and meticulous graphite detailing. The subject's gaze conveys a quiet blend of sorrow, resilience, and hope.">
         <div class="frame-border"></div>
-        <div class="frame-mat"><img src="assets/paintings/girl.png" alt="Her / Hope"></div>
+        <div class="frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/girl.jpg" alt="Her / Hope"></div>
         <div class="frame-label-plate">Her · Hope</div>
       </div>
 
@@ -242,22 +265,23 @@
     </div>
 
     <div class="mobile-controls">
-      <button data-mob="left">◀</button>
-      <button data-mob="right">▶</button>
+      <button data-mob="left" aria-label="Walk left">◀</button>
+      <button data-mob="right" aria-label="Walk right">▶</button>
     </div>
   </div><!-- #room1 -->
 
 
   <!-- ═══════════ ROOM 2 — CELESTIAL REFLECTION GALLERY ═══════════ -->
   <div class="scene" id="room2">
-    <div class="room-title r2-title">Room II — The Celestial Reflection Gallery</div>
+    <div class="room-title r2-title">Room II — The Hall of Constellations</div>
     <button class="back-btn back-btn-celestial" data-back>← Hallway</button>
     <div class="room-hint r2-hint">← → arrow keys or A / D to walk · look down at the obsidian</div>
     <div class="exit-hint-pill exit-hint-pill-celestial" id="exitHint2">walk through the archway to exit →</div>
+    <div class="mobile-controls"><button data-mob="left" aria-label="Walk left">◀</button><button data-mob="right" aria-label="Walk right">▶</button></div>
     <div class="exit-nav exit-nav-celestial" id="exitNav2">
       <button class="exit-nav-btn exit-nav-btn-prev" id="exitNavToRoom1">← Room I</button>
       <button class="exit-nav-btn" id="exitNavGallery2">Back to Gallery</button>
-      <button class="exit-nav-btn exit-nav-btn-locked" title="Coming soon">Room III → <span class="exit-nav-soon">soon</span></button>
+      <button class="exit-nav-btn exit-nav-btn-next" id="exitNavToRoom3">Room III →</button>
     </div>
 
     <!-- drifting starfield overlay (screen-space, doesn't scroll) -->
@@ -448,43 +472,43 @@
 
       <!-- ═══════════ ROOM 2 — DIGITAL PAINTINGS ═══════════ -->
 
-      <div id="c1" class="frame r2-frame" style="left:160px; bottom:calc(34% + 52px);"
+      <div id="c1" class="frame r2-frame" style="left:285px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Bubbleheart"
            data-desc="Created for the Mermay challenge, this illustration reimagines the universal experience of a childhood crush through an underwater classroom. From secret notes to shy glances, the piece captures the innocence, excitement, and quiet wonder of first affection beneath the waves.">
         <div class="r2-frame-border"></div>
-        <div class="r2-frame-mat"><img src="assets/paintings/crush.png" alt="Bubbleheart"></div>
+        <div class="r2-frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/crush.jpg" alt="Bubbleheart"></div>
         <div class="r2-frame-label-plate">Bubbleheart</div>
       </div>
 
-      <div id="c2" class="frame r2-frame" style="left:600px; bottom:calc(34% + 52px);"
+      <div id="c2" class="frame r2-frame" style="left:715px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="You Have You"
            data-desc="Created for the Inktober prompt You Have You, this artwork visualizes a meeting between past and present selves. It explores growth, self-compassion, and the realization that through every challenge, change, and triumph, we remain our own constant companion.">
         <div class="r2-frame-border"></div>
-        <div class="r2-frame-mat"><img src="assets/paintings/youhaveyou.png" alt="You Have You"></div>
+        <div class="r2-frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/youhaveyou.jpg" alt="You Have You"></div>
         <div class="r2-frame-label-plate">You Have You</div>
       </div>
 
-      <div id="c3" class="frame r2-frame" style="left:1070px; bottom:calc(34% + 52px);"
+      <div id="c3" class="frame r2-frame" style="left:1175px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Strength"
            data-desc="Created for Mermay and inspired by the story of Olympic champion Matthias Steiner, this illustration celebrates the power of love as a source of strength and motivation. Through an underwater interpretation, it reflects on how the memory and support of those we cherish can guide us through challenges and help us achieve what once seemed impossible.">
         <div class="r2-frame-border"></div>
-        <div class="r2-frame-mat"><img src="assets/paintings/Olympics.png" alt="Strength"></div>
+        <div class="r2-frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/Olympics.jpg" alt="Strength"></div>
         <div class="r2-frame-label-plate">Strength</div>
       </div>
 
-      <div id="c4" class="frame r2-frame" style="left:1550px; bottom:calc(34% + 52px);"
+      <div id="c4" class="frame r2-frame" style="left:1655px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="Mumma"
            data-desc="Created for the Mermay prompt Shellphone and inspired by Mother's Day, this artwork honors the quiet resilience of mothers. It celebrates their ability to offer comfort, support, and unconditional love while carrying countless responsibilities of their own.">
         <div class="r2-frame-border"></div>
-        <div class="r2-frame-mat"><img src="assets/paintings/Mother.png" alt="Mumma"></div>
+        <div class="r2-frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/Mother.jpg" alt="Mumma"></div>
         <div class="r2-frame-label-plate">Mumma</div>
       </div>
 
-      <div id="c5" class="frame r2-frame" style="left:2020px; bottom:calc(34% + 52px);"
+      <div id="c5" class="frame r2-frame" style="left:2145px; bottom:calc(34% + 90px); transform:translateX(-50%);"
            data-title="The Deal"
            data-desc="Created for the Inktober prompt Deal and inspired by Life of Pi, this artwork explores the unspoken understanding between two unlikely companions. It reflects on trust, survival, and the connections that emerge when navigating the unknown together.">
         <div class="r2-frame-border"></div>
-        <div class="r2-frame-mat"><img src="assets/paintings/friends.png" alt="The Deal"></div>
+        <div class="r2-frame-mat"><img loading="lazy" decoding="async" src="assets/paintings/friends.jpg" alt="The Deal"></div>
         <div class="r2-frame-label-plate">The Deal</div>
       </div>
 
@@ -530,17 +554,448 @@
     </div>
 
     <div class="mobile-controls">
-      <button data-mob="left">◀</button>
-      <button data-mob="right">▶</button>
+      <button data-mob="left" aria-label="Walk left">◀</button>
+      <button data-mob="right" aria-label="Walk right">▶</button>
     </div>
   </div><!-- #room2 -->
 
 
+  <!-- ═══════════ ROOM 3 — THE ROYAL OPERA ═══════════ -->
+  <div class="scene" id="room3">
+    <div class="room-title r3-title">Room III — The Royal Opera</div>
+    <button class="back-btn back-btn-opera" data-back>← Hallway</button>
+    <button class="r3-comingsoon-btn" id="r3ComingSoonBtn">Coming Soon</button>
+
+    <div class="r3-camera" id="r3camera">
+      <div class="r3-house">
+
+        <!-- ceiling + dome -->
+        <div class="r3-ceiling">
+          <div class="r3-ceiling-rose"></div>
+          <div class="r3-cornice"></div>
+        </div>
+
+        <!-- chandeliers -->
+        <div class="r3-chandelier" style="left:20%;"><div class="r3-chain"></div><div class="r3-chand-canopy"></div><div class="r3-chand-tier"><span></span><span></span><span></span><span></span><span></span></div><div class="r3-chand-glow"></div></div>
+        <div class="r3-chandelier r3-chand-center" style="left:50%;"><div class="r3-chain"></div><div class="r3-chand-canopy"></div><div class="r3-chand-tier"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="r3-chand-glow"></div></div>
+        <div class="r3-chandelier" style="left:80%;"><div class="r3-chain"></div><div class="r3-chand-canopy"></div><div class="r3-chand-tier"><span></span><span></span><span></span><span></span><span></span></div><div class="r3-chand-glow"></div></div>
+
+        <!-- side balconies -->
+        <div class="r3-balconies r3-balc-left">
+          <div class="r3-balcony"></div><div class="r3-balcony"></div><div class="r3-balcony"></div>
+        </div>
+        <div class="r3-balconies r3-balc-right">
+          <div class="r3-balcony"></div><div class="r3-balcony"></div><div class="r3-balcony"></div>
+        </div>
+
+        <!-- wall chandeliers flanking the proscenium -->
+        <div class="r3-wall-chand r3-wall-chand-l">
+          <div class="r3-wc-chain"></div><div class="r3-wc-canopy"></div>
+          <div class="r3-wc-body"><span></span><span></span><span></span><span></span></div>
+          <div class="r3-wc-glow"></div>
+        </div>
+        <div class="r3-wall-chand r3-wall-chand-r">
+          <div class="r3-wc-chain"></div><div class="r3-wc-canopy"></div>
+          <div class="r3-wc-body"><span></span><span></span><span></span><span></span></div>
+          <div class="r3-wc-glow"></div>
+        </div>
+
+        <!-- decorative pilaster columns flanking stage -->
+        <div class="r3-pilaster r3-pilaster-l"></div>
+        <div class="r3-pilaster r3-pilaster-r"></div>
+
+        <!-- proscenium / stage arch -->
+        <div class="r3-proscenium">
+          <div class="r3-crest">♛</div>
+          <div class="r3-arch-inner">
+            <!-- stage interior -->
+            <div class="r3-stage" id="r3stage">
+              <div class="r3-stage-glow"></div>
+              <div class="r3-spotlight-beam"></div>
+              <div class="r3-dust" id="r3dust"></div>
+
+              <!-- credits roll -->
+              <div class="r3-credits" id="r3credits"><div class="r3-credits-roll" id="r3creditsRoll"></div></div>
+
+              <!-- manual reading panel — lives on the stage screen -->
+              <div class="r3-manual" id="r3manual">
+                <button class="r3-manual-close" id="r3manualClose">✕ Close</button>
+                <div class="r3-manual-inner" id="r3manualInner"></div>
+              </div>
+
+              <!-- end-sequence buttons — shown ON the stage screen -->
+              <div class="r3-endbtns" id="r3endbtns">
+                <button class="r3-btn" id="r3replay">⟲ Replay</button>
+                <button class="r3-btn r3-btn-ghost" id="r3manualBtn">☰ Read Manually</button>
+              </div>
+
+              <!-- skip credits — visible only while credits roll -->
+              <button class="r3-skip" id="r3skip">Skip Credits ⤼</button>
+
+              <!-- tap prompt -->
+              <div class="r3-prompt" id="r3prompt">✦ Tap the Stage to Begin ✦</div>
+            </div>
+            <!-- velvet curtains -->
+            <div class="r3-curtain r3-curtain-l" id="r3curtainL"></div>
+            <div class="r3-curtain r3-curtain-r" id="r3curtainR"></div>
+          </div>
+        </div>
+
+        <!-- LEFT WALL — Achievements (single unified wall) -->
+        <div class="r3-wallpanel r3-wall-left">
+          <div class="r3-wall-surface">
+            <div class="r3-wall-sconce-l"><div class="r3-wsconce-arm"></div><div class="r3-wsconce-cup"><div class="r3-wsconce-flame"></div></div></div>
+            <div class="r3-achievement-section">
+              <div class="r3-plate">Achievements</div>
+              <div class="r3-ach-frames">
+                <div class="r3-ach-item">
+                  <div class="r3-ach-frame"
+                       data-title="Portrait for Vishal Batra"
+                       data-desc="Presenting my portrait of Vishal Batra, the brother of Captain Vikram Batra, was one of the biggest milestones in my artistic journey. Ever since I was a kid, I've loved drawing portraits of people. I always wondered how it would feel if the person I drew actually got to see my artwork — this moment felt like that childhood dream finally coming true. I had also made a portrait of Captain Vikram Batra as portrayed in Shershaah, which you can find in Room 1. I'm truly humbled to have had this opportunity, and it has only motivated me to keep creating. Stay tuned for more portraits!"
+                       data-quote="&quot;A childhood dream, finally coming true.&quot;">
+                    <div class="r3-ach-frame-border"></div>
+                    <div class="r3-ach-frame-mat">
+                      <img loading="lazy" decoding="async" src="assets/achievements/vishal-batra-portrait.jpeg" alt="Portrait for Vishal Batra">
+                    </div>
+                  </div>
+                  <div class="r3-ach-plate">Portrait for Vishal Batra</div>
+                </div>
+                <div class="r3-ach-item">
+                  <div class="r3-ach-frame"
+                       data-title="First Medal — Splash"
+                       data-desc="I've been holding crayons and brushes ever since I was a kid. Growing up, I participated in several art competitions, always trying my best to win one. Every competition taught me something new and pushed me to keep improving. It wasn't until Splash by Axis Bank that I finally received my first medal — a Silver Medal. Looking back, this small milestone always brings a smile to my face and reminds me to believe in myself, because with enough dedication, I know I can always do it."
+                       data-quote="&quot;Believe in yourself — dedication always gets you there.&quot;">
+                    <div class="r3-ach-frame-border"></div>
+                    <div class="r3-ach-frame-mat">
+                      <img loading="lazy" decoding="async" src="assets/achievements/first-medal.jpeg" alt="First Medal — Splash by Axis Bank">
+                    </div>
+                  </div>
+                  <div class="r3-ach-plate">First Medal — Splash</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT WALL — KRAFTOVITY gallery panel -->
+        <div class="r3-wallpanel r3-wall-right">
+          <div class="r3-wall-surface r3-wall-surface-right">
+            <div class="r3-wall-sconce-l r3-wall-sconce-r"><div class="r3-wsconce-arm"></div><div class="r3-wsconce-cup"><div class="r3-wsconce-flame"></div></div></div>
+            <div class="r3-kraftovity-section">
+              <div class="r3-kraftovity-title">KRAFTOVITY</div>
+              <div class="r3-kraftovity-rule"></div>
+              <div class="r3-kv-grid">
+                <div class="r3-kv-frame"
+                     data-title="KIIT Fest 9.0"
+                     data-desc="Celebrating the successful completion of KIIT Fest 9.0 with an amazing team and unforgettable memories."
+                     data-quote="&quot;Creativity is intelligence having fun.&quot;">
+                  <div class="r3-kv-frame-inner"><img loading="lazy" decoding="async" src="assets/kraftovity/kiit-fest-9.jpeg" alt="KIIT Fest 9.0"></div>
+                </div>
+                <div class="r3-kv-frame"
+                     data-title="Face Painting Event"
+                     data-desc="We participated in the face painting event hosted by IIT Kharagpur during their Spring Fest. This was one of the many events in which Kraftovity took part."
+                     data-quote="&quot;Every brush stroke is a heartbeat on canvas.&quot;">
+                  <div class="r3-kv-frame-inner"><img loading="lazy" decoding="async" src="assets/kraftovity/face-painting-iit-kgp.jpeg" alt="Face Painting Event at IIT Kharagpur Spring Fest"></div>
+                </div>
+                <div class="r3-kv-frame"
+                     data-title="Meeting Padma Shri Adwaita Gadanayak"
+                     data-desc="It was a workshop hosted by Kraftovity where we got the opportunity to meet Padma Shri awardee and renowned sculptor Adwaita Gadanayak."
+                     data-quote="&quot;Make visible what, without you, might never have been seen.&quot;">
+                  <div class="r3-kv-frame-inner"><img loading="lazy" decoding="async" src="assets/kraftovity/adwaita-gadanayak.jpeg" alt="Meeting Padma Shri Adwaita Gadanayak"></div>
+                </div>
+                <div class="r3-kv-frame"
+                     data-title="Kraftovity Decorations"
+                     data-desc="A glimpse of the events decorated by Kraftovity — Halloween, Sharod Agamoni, Kritarth, and MasterChef."
+                     data-quote="&quot;Art washes from the soul the dust of everyday life.&quot;">
+                  <div class="r3-kv-frame-inner"><img loading="lazy" decoding="async" src="assets/kraftovity/decorations.jpeg" alt="Kraftovity Decorations — Halloween, Sharod Agamoni, Kritarth, MasterChef"></div>
+                </div>
+              </div>
+            <div class="r3-kv-more">✦ More memorable frames coming soon ✦</div>
+            <div class="r3-kv-quote">"A place that helped me reconnect with a part of myself I thought I'd left behind. What once was just a childhood hobby found its way back into my life here. More than just a society, I found a family that made every moment meaningful. Forever grateful for the memories, the people, and the passion this place gave back to me."</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- stage apron + floor -->
+        <div class="r3-apron"></div>
+        <div class="r3-floor"></div>
+        <div class="r3-floor-rail r3-floor-rail-left" aria-hidden="true">
+          <span class="r3-floor-rail-post"></span><span class="r3-floor-rail-post"></span>
+        </div>
+        <div class="r3-floor-rail r3-floor-rail-right" aria-hidden="true">
+          <span class="r3-floor-rail-post"></span><span class="r3-floor-rail-post"></span>
+        </div>
+
+        <!-- audience: seated row -->
+        <div class="r3-audience">
+          <!-- back row removed to prevent overlap with theatre screen -->
+          <!-- middle row -->
+          <div class="r3-seat-row r3-seat-row-mid">
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+          </div>
+          <!-- front row (closest, where character + dog sit) -->
+          <div class="r3-seat-row">
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty">
+              <div class="r3-seat-back"></div>
+              <div class="r3-seat-cushion"></div>
+            </div>
+            <div class="r3-theater-seat r3-theater-seat-occupied" id="r3char">
+              <div class="r3-seat-back"></div>
+              <div class="r3-seat-cushion"></div>
+              <div class="r3-seated-figure">
+                <div class="char-scale-r3sit">
+                  <div class="char-rig r3-sit" id="r3-rig">
+                    <div class="char-shadow-el"></div>
+                    <div class="char-leg l"></div>
+                    <div class="char-leg r"></div>
+                    <div class="char-torso"></div>
+                    <div class="char-arm l"></div>
+                    <div class="char-head"></div>
+                    <div class="char-eye l"></div><div class="char-eye r"></div>
+                    <div class="char-blush l"></div><div class="char-blush r"></div>
+                    <div class="char-cap"></div>
+                    <div class="char-hair"></div>
+                    <div class="char-arm r"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="r3-theater-seat r3-theater-seat-dog" id="r3dogSeat">
+              <div class="r3-seat-back"></div>
+              <div class="r3-seat-cushion"></div>
+              <div class="r3-seated-figure">
+                <div class="dog-rig r3-dog-sit" id="r3-dog">
+                  <div class="dog-shadow"></div>
+                  <div class="dog-tail"></div>
+                  <div class="dog-body"></div>
+                  <div class="dog-leg dog-leg-bl"></div><div class="dog-leg dog-leg-br"></div>
+                  <div class="dog-leg dog-leg-fl"></div><div class="dog-leg dog-leg-fr"></div>
+                  <div class="dog-head">
+                    <div class="dog-ear dog-ear-l"></div><div class="dog-ear dog-ear-r"></div>
+                    <div class="dog-eye dog-eye-l"></div><div class="dog-eye dog-eye-r"></div>
+                    <div class="dog-snout"></div><div class="dog-nose"></div>
+                  </div>
+                  <div class="dog-collar"></div>
+                </div>
+              </div>
+            </div>
+            <div class="r3-theater-seat r3-theater-seat-empty">
+              <div class="r3-seat-back"></div>
+              <div class="r3-seat-cushion"></div>
+            </div>
+            <div class="r3-theater-seat r3-theater-seat-empty">
+              <div class="r3-seat-back"></div>
+              <div class="r3-seat-cushion"></div>
+            </div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+            <div class="r3-theater-seat r3-theater-seat-empty"><div class="r3-seat-back"></div><div class="r3-seat-cushion"></div></div>
+          </div>
+          <!-- aisle rails removed; floor elegance via CSS golden borders -->
+        </div>
+
+        <!-- contact me -->
+        <div class="r3-contact">
+          <div class="r3-contact-title">Contact Me</div>
+          <div class="r3-contact-links">
+            <a href="https://www.instagram.com/subhaaaaa_/" target="_blank" rel="noopener" data-c="Instagram">Instagram</a>
+            <a href="mailto:subhajeet07mishra@gmail.com" data-c="Email">Email</a>
+            <a href="https://www.linkedin.com/in/subhajeet-mishra-a531a4311/" target="_blank" rel="noopener" data-c="LinkedIn">LinkedIn</a>
+
+          </div>
+        </div>
+
+        <!-- Ceiling decoration overlay: medallions + gold trim arches + ornate centre -->
+        <div class="r3-ceiling-deco" aria-hidden="true">
+          <div class="r3-ceil-medallion r3-cm-l"></div>
+          <div class="r3-ceil-medallion r3-cm-r"></div>
+          <div class="r3-ceil-arch r3-ca-1"></div>
+          <div class="r3-ceil-arch r3-ca-2"></div>
+          <div class="r3-ceil-arch r3-ca-3"></div>
+          <div class="r3-ceil-arch r3-ca-4"></div>
+          <div class="r3-ceil-fresco">
+            <div class="r3-fresco-frame"></div>
+            <div class="r3-fresco-ring"></div>
+            <div class="r3-fresco-ring r3-fresco-ring-2"></div>
+            <div class="r3-fresco-crest">♛</div>
+            <div class="r3-fresco-rays">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="r3-ceil-swag r3-swag-l"></div>
+          <div class="r3-ceil-swag r3-swag-r"></div>
+          <div class="r3-ceil-corner r3-cc-tl"></div>
+          <div class="r3-ceil-corner r3-cc-tr"></div>
+        </div>
+
+        <!-- Room-nav corner buttons -->
+        <div class="r3-roomnav">
+          <button id="r3NavRoom1">⟵ Room I</button>
+          <button id="r3NavRoom2">⟵ Room II</button>
+        </div>
+
+
+        <!-- ══ MOBILE TAB UI — inside house, fixed overlay on mobile ══ -->
+        <div class="r3-tabs-ui" id="r3TabsUI">
+          <div class="r3-tab-bar">
+            <button class="r3-tab active" data-tab="stage">Stage</button>
+            <button class="r3-tab" data-tab="achievements">Achievements</button>
+            <button class="r3-tab" data-tab="kraftovity">Kraftovity</button>
+          </div>
+          <div class="r3-tab-panel active" id="r3tab-stage">
+            <div class="r3-tab-stage-nav">
+              <div class="r3-tab-stage-nav-row">
+                <button id="r3TabNavRoom1">⟵ Room I</button>
+                <button id="r3TabNavRoom2">⟵ Room II</button>
+              </div>
+              <div class="r3-tab-contact-title">Contact Me</div>
+              <div class="r3-tab-stage-nav-row">
+                <a href="https://www.instagram.com/subhajeet21/" target="_blank">Instagram</a>
+                <a href="mailto:subhajeetpaul2003@gmail.com">Email</a>
+                <a href="https://www.linkedin.com/in/subhajeet-paul-840271259/" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="r3-tab-panel" id="r3tab-achievements">
+            <div class="r3-tab-frame" data-title="Portrait for Vishal Batra" data-desc="Presenting my portrait of Vishal Batra, the brother of Captain Vikram Batra, was one of the biggest milestones in my artistic journey. Ever since I was a kid, I loved drawing portraits. I always wondered how it would feel if the person I drew actually saw my artwork — this moment felt like that childhood dream finally coming true." data-quote="A childhood dream, finally coming true.">
+              <div class="r3-tab-frame-border"></div>
+              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/achievements/vishal-batra-portrait.jpeg" alt="Portrait for Vishal Batra"></div>
+              <div class="r3-tab-frame-plate">Portrait for Vishal Batra</div>
+            </div>
+            <div class="r3-tab-frame" data-title="First Medal — Splash" data-desc="I have been holding crayons and brushes ever since I was a kid. It was not until Splash by Axis Bank that I finally received my first medal — a Silver Medal. This small milestone always brings a smile to my face." data-quote="Believe in yourself — dedication always gets you there.">
+              <div class="r3-tab-frame-border"></div>
+              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/achievements/first-medal.jpeg" alt="First Medal"></div>
+              <div class="r3-tab-frame-plate">First Medal — Splash</div>
+            </div>
+          </div>
+          <div class="r3-tab-panel" id="r3tab-kraftovity">
+            <div class="r3-tab-frame" data-title="KIIT Fest 9.0" data-desc="Celebrating the successful completion of KIIT Fest 9.0 with an amazing team and unforgettable memories." data-quote="Creativity is intelligence having fun.">
+              <div class="r3-tab-frame-border"></div>
+              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/kiit-fest-9.jpeg" alt="KIIT Fest 9.0"></div>
+              <div class="r3-tab-frame-plate">KIIT Fest 9.0</div>
+            </div>
+            <div class="r3-tab-frame" data-title="Face Painting — IIT KGP" data-desc="We participated in the face painting event hosted by IIT Kharagpur during their Spring Fest." data-quote="Every brush stroke is a heartbeat on canvas.">
+              <div class="r3-tab-frame-border"></div>
+              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/face-painting-iit-kgp.jpeg" alt="Face Painting IIT KGP"></div>
+              <div class="r3-tab-frame-plate">Face Painting — IIT KGP</div>
+            </div>
+            <div class="r3-tab-frame" data-title="Meeting Padma Shri Adwaita Gadanayak" data-desc="A workshop hosted by Kraftovity where we got to meet Padma Shri awardee and renowned sculptor Adwaita Gadanayak." data-quote="Make visible what, without you, might never have been seen.">
+              <div class="r3-tab-frame-border"></div>
+              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/adwaita-gadanayak.jpeg" alt="Adwaita Gadanayak"></div>
+              <div class="r3-tab-frame-plate">Padma Shri Adwaita Gadanayak</div>
+            </div>
+            <div class="r3-tab-frame" data-title="Kraftovity Decorations" data-desc="A glimpse of events decorated by Kraftovity — Halloween, Sharod Agamoni, Kritarth, and MasterChef." data-quote="Art washes from the soul the dust of everyday life.">
+              <div class="r3-tab-frame-border"></div>
+              <div class="r3-tab-frame-mat"><img loading="lazy" decoding="async" src="assets/kraftovity/decorations.jpeg" alt="Kraftovity Decorations"></div>
+              <div class="r3-tab-frame-plate">Kraftovity Decorations</div>
+            </div>
+            <p class="r3-tab-kv-quote">"A place that helped me reconnect with a part of myself I thought I had left behind. More than just a society, I found a family that made every moment meaningful."</p>
+          </div>
+        </div>
+
+      </div><!-- .r3-house -->
+    </div><!-- .r3-camera -->
+
+  <!-- single source of truth for credits / manual text -->
+    <div id="r3-credit-source" hidden>
+      <div class="r3-cr-end">✦</div>
+      <div class="r3-cr-intro">Introducing</div>
+      <h1 class="r3-cr-name">SUBHAJEET MISHRA</h1>
+      <div class="r3-cr-role">artist • engineer • dreamer</div>
+      <div class="r3-cr-end">✦</div>
+
+      <h2>Who Am I?</h2>
+      <p>Hello!</p>
+      <p>This is the story of a little kid who started painting with broken crayons on the old walls of his home.</p>
+      <p>My parents always encouraged me to draw, no matter how messy it became. They smiled at every little sketch I made until they realized I might leave no wall untouched. That's when they handed me my very first sketchbook, and there has been no turning back ever since.</p>
+      <p>What began as childhood curiosity slowly became a lifelong passion.</p>
+      <p>Painting has always been my safe space. It excites me, challenges me, overwhelms me, and somehow, in the middle of it all, brings me peace. Whenever words fail me, colours find a way to speak. Every painting carries a small piece of who I am.</p>
+      <p>Today, I'm Subhajeet—a B.Tech student who still gets excited whenever he sees bright colours around him. Engineering has become a part of my life, but art has always been where I feel most alive. No matter where life takes me, I know I'll always return to a blank canvas with the same excitement I had as a child.</p>
+
+      <h2>My Vision</h2>
+      <p>My goal isn't just to create paintings. I want to create work that makes people pause, reflect, smile, or see the world from a different perspective. If even one person connects with my work, I believe it has served its purpose.</p>
+      <p>I want my art to inspire conversations, spread kindness, and remind people that beauty can often be found in the simplest moments.</p>
+
+      <h2>My Journey</h2>
+      <p>During my school years, I completed my Pre-Final Year in Painting, a journey that strengthened both my artistic skills and my discipline.</p>
+      <p>Since then, every painting has been a lesson—each mistake helping me grow and each finished piece reminding me why I fell in love with art.</p>
+      <p>I hope to use what I've learned to create meaningful work and connect with others who share the same love for creativity.</p>
+
+      <h2>A Message To You</h2>
+      <p>If you're reading this, thank you for being here.</p>
+      <p>Whether you're an artist, someone who loves art, or simply a curious visitor, I'm grateful our paths crossed today.</p>
+      <p>I hope these paintings brought you a little peace, a little joy, or perhaps reminded you of a memory you thought you'd forgotten.</p>
+      <p>Thank you for walking through my gallery.</p>
+      <p>Every painting here carries a small piece of my journey.</p>
+      <p>Perhaps one of them will stay with you long after you've left.</p>
+
+      <h2>Until We Meet Again...</h2>
+
+      <div class="r3-cr-end">✦</div>
+    </div>
+  </div><!-- #room3 -->
+
+
+  <!-- ═══════════ COMING SOON OVERLAY (4th door) ═══════════ -->
+  <div id="coming-soon-overlay">
+    <div id="coming-soon-panel">
+      <button class="overlay-close" id="comingSoonClose" aria-label="Close">✕</button>
+      <div class="cs-heading">---- More Doors Coming Soon ----</div>
+      <div class="cs-grid">
+        <div class="cs-row">
+          <div class="cs-frame" data-zoom-type="video" data-zoom="assets/coming-soon/digital-animations.mp4">
+            <video src="assets/coming-soon/digital-animations.mp4" autoplay loop muted playsinline preload="none" aria-label="Digital Animations"></video>
+          </div>
+          <div class="cs-caption">
+            <h3>Digital Animations</h3>
+            <p>I'm currently exploring digital animations to bring my ideas to life. There's something exciting about making art move, and I can't wait to share what I've been working on.</p>
+          </div>
+        </div>
+        <div class="cs-row">
+          <div class="cs-frame" data-zoom="assets/coming-soon/social-media-graphic-design.jpeg"><img loading="lazy" decoding="async" src="assets/coming-soon/social-media-graphic-design.jpeg" alt="Social Media & Graphic Design"></div>
+          <div class="cs-caption">
+            <h3>Social Media &amp; Graphic Design</h3>
+            <p>I love designing creative visuals that are not just eye-catching but also tell a story. Every post is an opportunity to make something simple look aesthetic, engaging, and memorable.</p>
+          </div>
+        </div>
+        <div class="cs-row">
+          <div class="cs-frame" data-zoom="assets/coming-soon/photography.jpeg"><img loading="lazy" decoding="async" src="assets/coming-soon/photography.jpeg" alt="Photography"></div>
+          <div class="cs-caption">
+            <h3>Photography</h3>
+            <p>Photography has shown me that beauty isn't always in extraordinary places — it's in how you choose to see them. I love finding stories in everyday moments, where even a house, a street, or an evening sky can tell something meaningful through my lens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zoomed-in image/video lightbox (tap a Coming Soon frame to enlarge) -->
+  <div id="cs-zoom-overlay">
+    <img id="cs-zoom-img" src="" alt="">
+    <video id="cs-zoom-video" autoplay loop muted playsinline></video>
+    <div class="cs-zoom-stamp">Coming Soon</div>
+  </div>
+
   <!-- ═══════════ FRAME OVERLAY ═══════════ -->
   <div id="frame-overlay">
-    <button class="overlay-close" id="overlayClose">✕</button>
+    <button class="overlay-close" id="overlayClose" aria-label="Close">✕</button>
     <div id="overlay-frame">
-      <img id="overlay-img" alt="">
+      <img loading="lazy" decoding="async" id="overlay-img" alt="">
       <div id="overlay-celestial"></div>
     </div>
     <div id="overlay-note">
@@ -551,6 +1006,17 @@
         <div class="note-quote" id="note-quote"></div>
         <div class="note-body"  id="note-body">Description.</div>
       </div>
+    </div>
+  </div>
+
+
+  <!-- MOBILE FRAME MODAL — fullscreen popup for tab frame taps -->
+  <div id="mobFrameModal">
+    <button id="mobFrameClose" aria-label="Close">✕</button>
+    <div id="mobFrameScroll">
+      <img id="mobFrameImg" src="" alt="">
+      <div id="mobFrameTitle"></div>
+      <div id="mobFrameDesc"></div>
     </div>
   </div>
 
