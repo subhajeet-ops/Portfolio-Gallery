@@ -4,7 +4,7 @@
 
 *"Every artwork deserves more than a scroll. It deserves a room."*
 
-🌐 **[https://subhajeetgallery.vercel.app/](https://subhagallery.vercel.app/)**
+🌐 **[https://subhajeetgallery.vercel.app/](https://subhajeetgallery.vercel.app/)**
 
 </div>
 
