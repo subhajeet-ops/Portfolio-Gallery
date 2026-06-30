@@ -642,14 +642,17 @@
   const tabs   = tabsUI.querySelectorAll('.r3-tab');
   const panels = tabsUI.querySelectorAll('.r3-tab-panel');
   const handle = document.getElementById('r3SheetHandle');
+  const swipeHint = document.getElementById('r3SwipeHint');
 
   function openSheet() {
     tabsUI.classList.add('open');
     if (handle) handle.setAttribute('aria-expanded', 'true');
+    if (swipeHint) swipeHint.classList.add('hide');
   }
   function closeSheet() {
     tabsUI.classList.remove('open');
     if (handle) handle.setAttribute('aria-expanded', 'false');
+    if (swipeHint) swipeHint.classList.remove('hide');
   }
   function toggleSheet() {
     tabsUI.classList.contains('open') ? closeSheet() : openSheet();
