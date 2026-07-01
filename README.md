@@ -55,6 +55,8 @@ A grand theatre complete with chandeliers, velvet curtains, and tiered balconies
 - `prefers-reduced-motion` support for accessibility
 - Zero dependencies — pure HTML, CSS, and JavaScript
 
+The desktop and mobile experiences are intentionally different — not just scaled versions of each other. Some rooms reveal things differently depending on how you visit. Feel free to switch between devices and explore both.
+
 ---
 
 ## Controls
